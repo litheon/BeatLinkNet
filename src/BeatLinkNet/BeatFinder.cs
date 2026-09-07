@@ -535,6 +535,18 @@ public sealed class BeatFinder : LifecycleParticipant
     /// <param name="beat">the message announcing the new beat</param>
     private void DeliverBeat(Beat beat)
     {
+        DeliverBeatCore(beat);
+    }
+
+    /// <summary>
+    /// Test seam: delivers a synthetic beat through the exact production path (priority
+    /// listeners first, then the public event), without needing a socket.
+    /// </summary>
+    /// <param name="beat">the message announcing the new beat</param>
+    internal void DeliverBeatForTests(Beat beat) => DeliverBeatCore(beat);
+
+    private void DeliverBeatCore(Beat beat)
+    {
         IPriorityBeatListener[] priorityListeners;
         lock (_priorityBeatListeners)
         {

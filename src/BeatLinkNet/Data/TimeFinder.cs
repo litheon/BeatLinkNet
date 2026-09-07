@@ -406,7 +406,7 @@ public sealed class TimeFinder : LifecycleParticipant
         var tolerance = lastUpdate.Playing ? Slack : 0;  // If we are not playing, any difference is real, from a precise update.
         if (tolerance > 0 && skew > tolerance)
         {
-            Logger.LogDebug("InterpolationsDisagree: updates arrived {Millis} ms apart, last {LastKind}interpolates to {LastTime}, current {CurrentKind}interpolates to {CurrentTime}, skew {Skew}",
+            Logger.LogTrace("InterpolationsDisagree: updates arrived {Millis} ms apart, last {LastKind}interpolates to {LastTime}, current {CurrentKind}interpolates to {CurrentTime}, skew {Skew}",
                 (currentUpdate.Timestamp - lastUpdate.Timestamp) / 1_000_000,
                 lastUpdate.FromBeat ? "(beat) " : "", InterpolateTimeSinceUpdate(lastUpdate, now),
                 currentUpdate.FromBeat ? "(beat) " : "", InterpolateTimeSinceUpdate(currentUpdate, now), skew);

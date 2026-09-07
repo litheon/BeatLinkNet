@@ -600,7 +600,10 @@ public sealed class ConnectionManager : LifecycleParticipant
         lock (_lock)
         {
             var candidates = new List<Client>(_openClients.Values);
-            Logger.LogDebug("Scanning for idle clients; {Count} candidates.", candidates.Count);
+            // Trace, not Debug: this fires every 500 ms for the life of the service, and at
+            // Debug level it floods UI-visible log sinks (observed locking up the ShowControl
+            // log pane, which scrolls on every new row).
+            Logger.LogTrace("Scanning for idle clients; {Count} candidates.", candidates.Count);
             foreach (var client in candidates)
             {
                 if (_useCounts.GetValueOrDefault(client) < 1 &&

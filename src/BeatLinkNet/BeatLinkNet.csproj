@@ -20,6 +20,9 @@
 
   <ItemGroup>
     <InternalsVisibleTo Include="BeatLinkNet.Tests" />
+    <!-- ShowControl's integration tests drive the singletons through the same loopback and
+         injection seams our own tests use. -->
+    <InternalsVisibleTo Include="ShowControl.Tests" />
   </ItemGroup>
 
 </Project>
