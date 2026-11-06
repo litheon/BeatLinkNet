@@ -601,6 +601,10 @@ public class PrecisePositionTests
     }
 }
 
+// OpusProvider is a process-wide singleton that the VirtualRekordbox tests start, and the
+// synthetic-constructor test below expects to find it stopped. xUnit runs test classes in
+// parallel, so this class joins the collection that serialises the singleton-service tests.
+[Collection("Network services")]
 public class MediaDetailsTests
 {
     private static byte[] MediaResponsePacket(byte hostPlayer)
